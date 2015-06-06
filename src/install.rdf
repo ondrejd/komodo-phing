@@ -8,15 +8,16 @@
      xmlns:em="http://www.mozilla.org/2004/em-rdf#">
 
 	<Description about="urn:mozilla:install-manifest">
-		<em:id>phingsupport@ondrejd.info</em:id>
+		<em:id>komodo-phing-support@ondrejd.info</em:id>
 		<em:name>Phing Support</em:name>
 		<em:version>%%ADDON_VERSION%%</em:version>
 		<em:unpack>true</em:unpack>
 		<em:description>Phing support for Komodo Edit files.</em:description>
 		<em:creator>Ondřej Doněk</em:creator>
-		<em:homepageURL></em:homepageURL>
+		<em:iconURL>chrome://komodo-phing-support/skin/icon32.png</em:iconURL>
+		<em:homepageURL>https://github.com/ondrejd/komodo-phing-support</em:homepageURL>
 		<em:updateURL></em:updateURL>
-		
+
 		<!-- Komodo Edit -->
 		<em:targetApplication>
 			<Description>
@@ -25,8 +26,8 @@
 				<em:maxVersion>9.*</em:maxVersion>
 			</Description>
 		</em:targetApplication>
-		
-		<!-- Komodo IDE 
+
+		<!-- Komodo IDE
 		<em:targetApplication>
 			<Description>
 				Komodo IDE's uuid
