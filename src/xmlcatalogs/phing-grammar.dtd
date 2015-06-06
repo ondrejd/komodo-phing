@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ============================================================================
+  DTD file for Phing build files.
+
+  Phing homepage: https://www.phing.info/
+  Phing documentation: https://www.phing.info/docs/stable/hlhtml/index.html
+
+  Note: This DTD DOES NOT PROVIDE all possibilities which Phing offer but
+  it just contains all core and optional tasks and other elements (project,
+  target etc.)
+
+  The target is simple - provides simple autocomplete inside the Komodo Edit
+  for Phing build files.
+
+  Author: Ondřej Doněk, <ondrejd@gmail.com>
+  License: Mozilla Public License 2.0, https://www.mozilla.org/MPL/2.0
+  ============================================================================
+-->
+
+<!--
+  ============================================================================
+  Project element
+
+  See: https://www.phing.info/docs/stable/hlhtml/index.html#Project
+  ============================================================================
+-->
+<!ELEMENT project (selector |target |adhoc-task |adhoc-type |append)*>
+<!ATTLIST project
+	name CDATA #IMPLIED
+	basedir CDATA #IMPLIED
+	description CDATA #IMPLIED
+	default CDATA #REQUIRED
+	phingVersion CDATA #IMPLIED
+>
+
+<!--
+  ============================================================================
+  Target element
+
+  See: https://www.phing.info/docs/stable/hlhtml/index.html#Target
+  ============================================================================
+-->
+<!ELEMENT target ANY>
+<!ATTLIST target
+	depends CDATA #IMPLIED
+	description CDATA #IMPLIED
+	if CDATA #IMPLIED
+	name ID #REQUIRED
+	unless CDATA #IMPLIED
+	hidden (true|false) "false"
+	logskipped (true|false) "false"
+>
+
+<!--
+  ============================================================================
+  AdhocTaskdefTask
+
+  See: https://www.phing.info/docs/stable/hlhtml/index.html#AdhocTaskdefTask
+  ============================================================================
+-->
+<!ELEMENT adhoc-task (#PCDATA)>
+<!ATTLIST adhoc-task name ID #REQUIRED>
+
+<!--
+  ============================================================================
+  AdhocTypedefTask
+
+  See: https://www.phing.info/docs/stable/hlhtml/index.html#AdhocTypedefTask
+  ============================================================================
+-->
+<!ELEMENT adhoc-type (#PCDATA)>
+<!ATTLIST adhoc-type name ID #REQUIRED>
+
+<!--
+  ============================================================================
+  AppendTask
+
+  See: https://www.phing.info/docs/stable/hlhtml/index.html#AppendTask
+  ============================================================================
+-->
+<!ELEMENT append (filelist|fileset|filterchain)*>
+<!ATTLIST append
+	destFile CDATA #REQUIRED
+	file CDATA #IMPLIED
+	text CDATA #IMPLIED
+>
+
+<!--
+  ============================================================================
+  ApplyTask
+
+  See: https://www.phing.info/docs/stable/hlhtml/index.html#ApplyTask
+  ============================================================================
+-->
+<!ELEMENT apply (arg+,(fileset|filelist|srcfile))*>
+<!ATTLIST apply
+	executable CDATA #IMPLIED
+	dir CDATA #IMPLIED
+	output CDATA #IMPLIED
+	error CDATA #IMPLIED
+	os CDATA #IMPLIED
+	escape (true|false) "false"
+	passthru (true|false) "false"
+	spawn (true|false) "false"
+	returnProperty CDATA #IMPLIED
+	outputProperty CDATA #IMPLIED
+	checkreturn (true|false) "false"
+	append (true|false) "false"
+	parallel (true|false) "false"
+	addsourcefile (true|false) "true"
+	relative (true|false) "false"
+	forwardslash (true|false) "false"
+	maxparallel (true|false) "false"
+>
+
+<!ELEMENT arg EMPTY>
+<!ATTLIST arg
+	value CDATA #IMPLIED
+	file CDATA #IMPLIED
+	path CDATA #IMPLIED
+	line CDATA #IMPLIED
+>
+
+<!ELEMENT srcfile EMPTY>
+
+<!--
+  ============================================================================
+  PropertyTask
+
+  See: https://www.phing.info/docs/stable/hlhtml/index.html#PropertyTask
+  ============================================================================
+-->
+<!ELEMENT property (filterchain?)>
+<!ATTLIST property
+	name ID #IMPLIED
+	value CDATA #IMPLIED
+	environment CDATA #IMPLIED
+	file CDATA #IMPLIED
+	override (true|false) "false"
+	prefix CDATA #IMPLIED
+	refid IDREF #IMPLIED
+	fallback CDATA #IMPLIED
+	logoutput (true|false) "true"
+>
+
+<!--
+  ============================================================================
+  FileList
+
+  See: https://www.phing.info/docs/stable/hlhtml/index.html#FileList
+  ============================================================================
+-->
+<!ELEMENT filelist EMPTY>
+<!ATTLIST filelist
+	dir CDATA #REQUIRED
+	files CDATA #IMPLIED
+	listfile CDATA #IMPLIED
+>
+
+<!--
+  ============================================================================
+  FileSet
+
+  See: https://www.phing.info/docs/stable/hlhtml/index.html#FileSet
+  ============================================================================
+-->
+<!ELEMENT fileset (include|exclude|patternset|contains|date|depend|depth|filename|present|containsregexp|size|type|and|majority|none|not|or)*>
+<!ATTLIST fileset
+	dir CDATA #REQUIRED
+	defaultexcludes (true|false) "true"
+	casesensitive (true|false) "true"
+	expandsymboliclinks (true|false) "false"
+	includes CDATA #IMPLIED
+	includesfile CDATA #IMPLIED
+	excludes CDATA #IMPLIED
+	excludesfile CDATA #IMPLIED
+>
+
+<!--
+  ============================================================================
+  Core filters
+
+  See: https://www.phing.info/docs/stable/hlhtml/index.html#app.corefilters
+  ============================================================================
+-->
+<!ELEMENT filterchain ANY>
+
+<!--
+  ============================================================================
+  Core selectors
+
+  See: https://www.phing.info/docs/stable/hlhtml/index.html#app.selectors
+  ============================================================================
+-->
+<!ELEMENT contains EMPTY>
+<!ATTLIST contains
+	text CDATA #REQUIRED
+	casesensitive (true|false) "true"
+>
+
+<!ELEMENT date EMPTY>
+<!ATTLIST date
+	datetime CDATA #IMPLIED
+	seconds CDATA #IMPLIED
+	when (before|after|equal) "equal"
+	granularity CDATA "0"
+	checkdirs (true|false) "false"
+>
+
+<!ELEMENT depend EMPTY>
+<!ATTLIST depend
+	targetdir CDATA #REQUIRED
+	granularity CDATA "0"
+>
+
+<!ELEMENT depth EMPTY>
+<!ATTLIST depth
+	min CDATA #IMPLIED
+	max CDATA #IMPLIED
+>
+
+<!ELEMENT filename EMPTY>
+<!ATTLIST filename
+	name CDATA #REQUIRED
+	casesensitive (true|false) "true"
+	negate (true|false) "false"
+>
+
+<!ELEMENT present EMPTY>
+<!ATTLIST present
+	targetdir CDATA #REQUIRED
+	present (srconly|both) "both"
+>
+
+<!ELEMENT containsregexp EMPTY>
+<!ATTLIST containsregexp
+	expression CDATA #REQUIRED
+	casesensitive (true|false) "true"
+>
+
+<!ELEMENT size EMPTY>
+<!ATTLIST size
+	value CDATA #REQUIRED
+	units CDATA #IMPLIED
+	when (less|more|equal) "equal"
+>
+
+<!ELEMENT type EMPTY>
+<!ATTLIST type
+	when (file|dir) #REQUIRED
+>
+
+<!-- Selector containers: -->
+<!ELEMENT and (contains|date|depend|depth|filename|present|containsregexp|size|type)>
+<!ELEMENT majority (contains|date|depend|depth|filename|present|containsregexp|size|type)>
+<!ELEMENT none (contains|date|depend|depth|filename|present|containsregexp|size|type)>
+<!ELEMENT not (contains|date|depend|depth|filename|present|containsregexp|size|type)>
+<!ELEMENT or (contains|date|depend|depth|filename|present|containsregexp|size|type)>
+
+<!-- Contains only one selector and forwards all requests to it without
+   - alteration. This is the selector to use if you want to define a reference.
+   - It is usable as an element of <project>.
+   -->
+<!ELEMENT selector (contains|date|depend|depth|filename|present|containsregexp|size|type|and|majority|none|not|or)>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

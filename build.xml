@@ -18,7 +18,7 @@
 	<property name="builddir" value="${project.basedir}/build"/>
 	<property name="srcdir" value="${project.basedir}/src"/>
 	<!-- Name of output XPI package. -->
-	<property name="xpiname" 
+	<property name="xpiname"
 	          value="${project.basedir}/${addon.name}-${addon.version}.xpi"/>
 
 	<!-- All source files (without install.rdf file). -->
@@ -53,12 +53,12 @@
 			</fileset>
 		</zip>
 	</target>
-	
+
 	<!-- Clean build temporary files. -->
 	<target name="clean" description="Clean build temporary files.">
 		<delete dir="${builddir}" quiet="true"/>
 	</target>
-	
+
 	<!-- Clean distribution package. -->
 	<target name="cleandist" depends="clean" description="Clean distribution package.">
 		<delete file="${xpiname}" quiet="true"/>
