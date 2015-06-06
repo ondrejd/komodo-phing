@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!DOCTYPE project PUBLIC "-//PHING GRAMMAR V0.1" "http://ondrejd.info/phing-grammar">
+<project name="[[%tabstop:ProjectName]]" basedir="." default="build">
+	<property name="version" value="[[%tabstop:1.0]]" />
+
+	<target name="build" depends="prepare" description="Build project.">
+		<echo msg="Building your project ${phing.project.name}..."/>
+	</target>
+
+</project>

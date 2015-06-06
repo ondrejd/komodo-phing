@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE project PUBLIC "-//PHING GRAMMAR V0.1" "http://ondrejd.info/phing-grammar">
+<project name="[[%tabstop:ProjectName]]" basedir="." default="build">
+	<property name="version" value="[[%tabstop:1.0]]" />
+
+	<!-- Build and sources directories - just for convience. -->
+	<property name="builddir" value="${project.basedir}/build"/>
+	<property name="srcdir" value="${project.basedir}/src"/>
+
+	<!-- Readme files. -->
+	<fileset dir="${project.basedir}" id="readme_files">
+		<include name="LICENSE"/>
+		<include name="README.md"/>
+	</fileset>
+
+	<!-- Source files. -->
+	<fileset dir="${srcdir}" id="source_files">
+		<include name="**"/>
+	</fileset>
+
+	<!-- Prepare build directory and copy source files into. -->
+	<target name="prepare" depends="clean" hidden="true">
+		<!-- Create build directory.  -->
+		<mkdir dir="${builddir}"/>
+		<!-- Copy all source files into the build directory. -->
+		<copy todir="${builddir}">
+			<fileset refid="source_files"/>
+		</copy>
+		<!-- Copy LICENSE and README.md files. -->
+		<copy todir="${builddir}">
+			<fileset refid="readme_files"/>
+		</copy>
+	</target>
+
+	<!-- Build project. -->
+	<target name="build" depends="prepare" description="Build project.">
+		<zip destfile="${phing.project.name}-${version}.zip">
+			<fileset dir="${builddir}">
+				<include name="**/**" />
+			</fileset>
+		</zip>
+	</target>
+
+	<!-- Clean build temporary files. -->
+	<target name="clean" description="Clean build temporary files.">
+		<delete dir="${builddir}" quiet="true"/>
+	</target>
+
+	<!-- Clean distribution package. -->
+	<target name="cleandist" depends="clean" description="Clean distribution package.">
+		<delete file="${phing.project.name}-${version}.zip" quiet="true"/>
+	</target>
+
+</project>
