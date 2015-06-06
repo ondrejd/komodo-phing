@@ -19,6 +19,11 @@
   ============================================================================
 -->
 
+<!-- Used in ChmodTask, ChownTask and others. -->
+<!ENTITY % QuietFailVerboseAttList "quiet (true|false) 'false'
+                                    failonerror (true|false) 'true'
+                                    verbose (true|false) 'true'">
+
 <!--
   ============================================================================
   Project element
@@ -26,7 +31,7 @@
   See: https://www.phing.info/docs/stable/hlhtml/index.html#Project
   ============================================================================
 -->
-<!ELEMENT project (selector |target |adhoc-task |adhoc-type |append)*>
+<!ELEMENT project (property|selector|target)*>
 <!ATTLIST project
 	name CDATA #IMPLIED
 	basedir CDATA #IMPLIED
@@ -42,7 +47,9 @@
   See: https://www.phing.info/docs/stable/hlhtml/index.html#Target
   ============================================================================
 -->
-<!ELEMENT target ANY>
+<!ELEMENT target (adhoc-task|adhoc-type|append|apply|available|basename|chmod|
+                  chown|condition|copy|cvs|cvspass|delete|diagnostics|dirname|
+                  echo)>
 <!ATTLIST target
 	depends CDATA #IMPLIED
 	description CDATA #IMPLIED
@@ -124,6 +131,215 @@
 >
 
 <!ELEMENT srcfile EMPTY>
+
+<!--
+  ============================================================================
+  AvailableTask
+
+  See: https://www.phing.info/docs/stable/hlhtml/index.html#AvailableTask
+  ============================================================================
+  
+  TODO The AvailableTask can also be used as a condition.
+  See: https://www.phing.info/docs/stable/hlhtml/index.html#conditions
+-->
+<!ELEMENT available EMPTY>
+<!ATTLIST available 
+	property CDATA #REQUIRED
+	value CDATA #IMPLIED
+	file CDATA #IMPLIED
+	resource CDATA #IMPLIED
+	extension CDATA #IMPLIED
+	type (file|dir) #IMPLIED
+	filepath CDATA #IMPLIED
+	followSymlinks (true|false) "false"
+>
+
+<!--
+  ============================================================================
+  Basename
+
+  See: https://www.phing.info/docs/stable/hlhtml/index.html#Basename
+  ============================================================================
+-->
+<!ELEMENT basename EMPTY>
+<!ATTLIST basename
+	property CDATA #REQUIRED
+	file CDATA #REQUIRED
+	suffix CDATA #IMPLIED
+>
+
+<!--
+  ============================================================================
+  ChmodTask
+
+  See: https://www.phing.info/docs/stable/hlhtml/index.html#ChmodTask
+  ============================================================================
+-->
+<!ELEMENT chmod (fileset?)>
+<!ATTLIST chmod
+	file CDATA #REQUIRED
+	mode CDATA #REQUIRED
+	%QuietFailVerboseAttList;
+>
+
+<!--
+  ============================================================================
+  ChownTask
+
+  See: https://www.phing.info/docs/stable/hlhtml/index.html#ChownTask
+  ============================================================================
+-->
+<!ELEMENT chown (fileset?)>
+<!ATTLIST chown
+	file CDATA #REQUIRED
+	user CDATA #IMPLIED
+	group CDATA #IMPLIED
+	%QuietFailVerboseAttList;
+>
+
+<!--
+  ============================================================================
+  ConditionTask
+
+  See: https://www.phing.info/docs/stable/hlhtml/index.html#ConditionTask
+  ============================================================================
+  
+  TODO We have trable with <or> or <and> subelements because they have 
+       same name as some of the selector containers.
+-->
+<!ELEMENT condition ANY>
+<!ATTLIST condition
+	property CDATA #REQUIRED
+	value CDATA #IMPLIED
+>
+
+<!--
+  ============================================================================
+  CopyTask
+
+  See: https://www.phing.info/docs/stable/hlhtml/index.html#CopyTask
+  ============================================================================
+-->
+<!ELEMENT copy (fileset|filelist|filterchain|mapper)*>
+<!ATTLIST copy
+	file CDATA #REQUIRED
+	tofile CDATA #IMPLIED
+	todir CDATA #IMPLIED
+	overwrite (true|false) "false"
+	tstamp (true|false) "false"
+	preservelastmodified (true|false) "false"
+	preservemode (true|false) "true"
+	preservepermissions (true|false) "true"
+	includeemptydirs (true|false) "true"
+	mode CDATA #IMPLIED
+	haltonerror (true|false) "true"
+>
+
+<!--
+  ============================================================================
+  CvsTask
+
+  See: https://www.phing.info/docs/stable/hlhtml/index.html#CvsTask
+  ============================================================================
+  
+  TODO There is an inconstitance in Phing documentation on this task!
+-->
+<!ELEMENT cvs EMPTY>
+<!ATTLIST cvs
+	cvsRoot CDATA #IMPLIED
+	CvsRsh CDATA #IMPLIED
+	port CDATA "0"
+	passfile CDATA #IMPLIED
+	dest CDATA #REQUIRED
+	module CDATA #IMPLIED
+	tag CDATA #IMPLIED
+	date CDATA #IMPLIED
+	quiet (true|false) "false"
+	noexec (true|false) "false"
+	failonerror (true|false) "false"
+	compression (true|false) "false"
+	compressionlevel (1|2|3|4|5|6|7|8|9)
+	output CDATA #IMPLIED
+	error CDATA #IMPLIED
+	command CDATA #IMPLIED
+>
+
+<!--
+  ============================================================================
+  CvsPassTask
+
+  See: https://www.phing.info/docs/stable/hlhtml/index.html#CvsPassTask
+  ============================================================================
+-->
+<!ELEMENT cvspass EMPTY>
+<!ATTLIST cvspass
+	cvsRoot CDATA #REQUIRED
+	passFile CDATA #IMPLIED
+	password CDATA #REQUIRED
+>
+
+<!--
+  ============================================================================
+  DeleteTask
+
+  See: https://www.phing.info/docs/stable/hlhtml/index.html#DeleteTask
+  ============================================================================
+-->
+<!ELEMENT delete (fileset?)>
+<!ATTLIST delete
+	file CDATA #IMPLIED
+	dir CDATA #IMPLIED
+	includeemptydirs (true|false) "false"
+	%QuietFailVerboseAttList;
+>
+
+<!--
+  ============================================================================
+  DiagnosticsTask
+
+  See: https://www.phing.info/docs/stable/hlhtml/index.html#DiagnosticsTask
+  ============================================================================
+-->
+<!ELEMENT diagnostics EMPTY>
+
+<!--
+  ============================================================================
+  Dirname
+
+  See: https://www.phing.info/docs/stable/hlhtml/index.html#Dirname
+  ============================================================================
+-->
+<!ELEMENT dirname EMPTY>
+<!ATTLIST dirname
+	file CDATA #REQUIRED
+	property CDATA #REQUIRED
+>
+
+<!--
+  ============================================================================
+  EchoTask
+
+  See: https://www.phing.info/docs/stable/hlhtml/index.html#EchoTask
+  ============================================================================
+-->
+<!ELEMENT echo (#PCDATA|fileset?)>
+<!ATTLIST echo
+	msg CDATA #IMPLIED
+	message CDATA #IMPLIED
+	file CDATA #IMPLIED
+	append (true|false) "false"
+	level (error|warning|info|verbose|debug) "info"
+>
+
+
+
+
+<!--
+
+XXX ....
+
+-->
+
 
 <!--
   ============================================================================
@@ -264,7 +480,6 @@
    - It is usable as an element of <project>.
    -->
 <!ELEMENT selector (contains|date|depend|depth|filename|present|containsregexp|size|type|and|majority|none|not|or)>
-
 
 
 
