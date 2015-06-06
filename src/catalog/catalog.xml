@@ -1,0 +1,19 @@
+<?xml version='1.0'?>
+
+<!--
+  ==========================================================================
+
+  For using this catalog with your Phing build files use this doctype:
+
+  <!DOCTYPE project PUBLIC "-//PHING GRAMMAR V0.1" "http://ondrejd.info/phing-grammar">
+
+  ==========================================================================
+-->
+
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="public">
+
+	<public publicId="-//PHING GRAMMAR V0.1" uri="phing-grammar.dtd"/>
+	<system systemId="http://ondrejd.info/phing-grammar" uri="phing-grammar.dtd"/>
+	<uri name="http://ondrejd.info/phing-grammar" uri="phing-grammar.dtd"/>
+
+</catalog>

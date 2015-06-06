@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!DOCTYPE project PUBLIC "-//PHING GRAMMAR V0.1" "http://ondrejd.info/phing-grammar">
+
+<!-- Phing build file for "Phing Support for Komodo Edit Addon" project. -->
+
+<project name="komodo-phing-support" basedir="." default="build">
+
+	<!-- Version and name of our addon. -->
+	<property name="addon.name" value="${phing.project.name}"/>
+	<property name="addon.version" value="0.1" />
+
+	<!-- Build and sources directories - just for convience. -->
+	<property name="builddir" value="${project.basedir}/build"/>
+	<property name="srcdir" value="${project.basedir}/src"/>
+	<!-- Name of output XPI package. -->
+	<property name="xpiname" 
+	          value="${project.basedir}/${addon.name}-${addon.version}.xpi"/>
+
+	<!-- All source files (without install.rdf file). -->
+	<fileset dir="${srcdir}" id="source_files">
+		<include name="**"/>
+		<exclude name="install.rdf"/>
+	</fileset>
+
+	<!-- Prepare build directory and source files. -->
+	<target name="prepare" depends="clean" hidden="true">
+		<!-- Create build directory.  -->
+		<mkdir dir="${builddir}"/>
+		<!-- Copy all source files into the build directory. -->
+		<copy todir="${builddir}">
+			<fileset refid="source_files"/>
+		</copy>
+		<!-- Copy install.rdf file separately. -->
+		<copy file="${srcdir}/install.rdf" tofile="${builddir}/install.rdf">
+			<filterchain>
+				<replacetokens begintoken="%%" endtoken="%%">
+					<token key="ADDON_VERSION" value="${addon.version}"/>
+				</replacetokens>
+			</filterchain>
+		</copy>
+	</target>
+
+	<!-- Build XPI package. -->
+	<target name="build" depends="prepare" description="Build XPI package.">
+		<zip destfile="${xpiname}">
+			<fileset dir="${builddir}">
+				<include name="**/**" />
+			</fileset>
+		</zip>
+	</target>
+	
+	<!-- Clean build temporary files. -->
+	<target name="clean" description="Clean build temporary files.">
+		<delete dir="${builddir}" quiet="true"/>
+	</target>
+	
+	<!-- Clean distribution package. -->
+	<target name="cleandist" depends="clean" description="Clean distribution package.">
+		<delete file="${xpiname}" quiet="true"/>
+	</target>
+
+</project>

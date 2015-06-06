@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ==========================================================================
+  DTD file for Phing build files.
+
+  Phing homepage: https://www.phing.info/
+  Phing documentation: https://www.phing.info/docs/stable/hlhtml/index.html
+
+  Note: This DTD DOES NOT PROVIDE all possibilities which Phing offer but
+  it just contains all core and optional tasks and other elements (project,
+  target etc.)
+
+  The target is simple - provides simple autocomplete inside the Komodo Edit
+  for Phing build files.
+
+  Author: Ondřej Doněk, <ondrejd@gmail.com>
+  License: Mozilla Public License 2.0, https://www.mozilla.org/MPL/2.0
+  ==========================================================================
+-->
+
+
+<!--
+  ==========================================================================
+  Project element
+
+  See: https://www.phing.info/docs/stable/hlhtml/index.html#Project
+  ==========================================================================
+-->
+<!ELEMENT project (property)*>
+<!ATTLIST project name IDREF #IMPLIED>
+<!ATTLIST project basedir CDATA #IMPLIED>
+<!ATTLIST project description CDATA #IMPLIED>
+<!ATTLIST project default CDATA #REQUIRED>
+<!ATTLIST project phingVersion CDATA #IMPLIED>
+
+<!--
+  ==========================================================================
+  Target element
+
+  See: https://www.phing.info/docs/stable/hlhtml/index.html#Target
+  ==========================================================================
+-->
+<!ELEMENT target ANY>
+<!ATTLIST target depends CDATA #IMPLIED>
+<!ATTLIST target description CDATA #IMPLIED>
+<!ATTLIST target if CDATA #IMPLIED>
+<!ATTLIST target name CDATA #REQUIRED>
+<!ATTLIST target unless CDATA #IMPLIED>
+<!ATTLIST target hidden (true|false) "false">
+<!ATTLIST target logskipped (true|false) "false">
+
+<!--
+   - See: https://www.phing.info/docs/stable/hlhtml/index.html#PropertyTask
+   -->
+<!ELEMENT property (filterchain?)>
+<!ATTLIST property name ID #IMPLIED>
+<!ATTLIST property value CDATA #IMPLIED>
+<!ATTLIST property environment CDATA #IMPLIED>
+<!ATTLIST property file CDATA #IMPLIED>
+<!ATTLIST property override (true|false) "false">
+<!ATTLIST property prefix CDATA #IMPLIED>
+<!ATTLIST property refid IDREF #IMPLIED>
+<!ATTLIST property fallback CDATA #IMPLIED>
+<!ATTLIST property logoutput (true|false) "true">
+
+<!--
+   - https://www.phing.info/docs/stable/hlhtml/index.html#app.corefilters
+   -->
+<!ELEMENT filterchain ANY>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
