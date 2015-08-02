@@ -6,3 +6,4 @@ content komodo-phing-support content/
 skin komodo-phing-support classic/1.0 skin/
 locale komodo-phing-support en-US locale/en-US/
 
+#overlay chrome://komodo/content/komodo.xul chrome://komodo-phing-support/content/overlays.xul

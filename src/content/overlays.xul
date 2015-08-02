@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!DOCTYPE overlay PUBLIC "-//MOZILLA//DTD XUL V1.0//EN" "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+<overlay id="komodophingsupportOverlay"
+         xmlns:html="http://www.w3.org/1999/xhtml"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<script src="chrome://komodo-phing-support/content/overlays.js" type="application/x-javascript"/>
+
+	<commandset id="allcommands">
+		<!--
+		<commandset id="KomodoPhingSupport">
+			<command id="KomodoPhingSupport:Test" oncommand="KomodoPhingSupport.test()"/>
+		</commandset>
+		-->
+	</commandset>
+
+	<menupopup id="popup_tools">
+		<menu label="Phing" accesskey="P">
+			<menupopup id="komodo-phing-support-popup"
+			           onpopupshowing="KomodoPhingSupport.onPhingMenuShowing(event)"/>
+		</menu>
+	</menupopup>
+
+</overlay>

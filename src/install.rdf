@@ -11,12 +11,13 @@
 		<em:id>komodo-phing-support@ondrejd.info</em:id>
 		<em:name>Phing Support</em:name>
 		<em:version>%%ADDON_VERSION%%</em:version>
-		<em:unpack>true</em:unpack>
 		<em:description>Phing support for Komodo Edit files.</em:description>
 		<em:creator>Ondřej Doněk</em:creator>
-		<em:iconURL>chrome://komodo-phing-support/skin/icon32.png</em:iconURL>
 		<em:homepageURL>https://github.com/ondrejd/komodo-phing-support</em:homepageURL>
-		<em:updateURL></em:updateURL>
+		<em:iconURL>chrome://komodo-phing-support/skin/icon32.png</em:iconURL>
+		<em:type>2</em:type>
+		<em:bootstrap>true</em:bootstrap>
+		<em:unpack>true</em:unpack>
 
 		<!-- Komodo Edit -->
 		<em:targetApplication>
@@ -27,7 +28,7 @@
 			</Description>
 		</em:targetApplication>
 
-		<!-- Komodo IDE
+		<!-- Komodo IDE -->
 		<em:targetApplication>
 			<Description>
 				Komodo IDE's uuid
@@ -35,7 +36,7 @@
 				<em:minVersion>9.0</em:minVersion>
 				<em:maxVersion>9.*</em:maxVersion>
 			</Description>
-		</em:targetApplication> -->
+		</em:targetApplication>
 	</Description>
 
 </RDF>

@@ -28,3 +28,12 @@ This is just for IDEs or editors which do not support [RELAX NG](http://www.rela
 
 For more details on this topic see _Phing_ [documentation](https://www.phing.info/docs/stable/hlhtml/index.html#d5e1043).
 
+
+
+
+
+About installing:
+
+We can try bootstrap approach:
+
+https://github.com/Komodo/KomodoEdit/blob/master/src/modules/kopy
